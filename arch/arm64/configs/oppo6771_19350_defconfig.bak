@@ -1,5 +1,4 @@
 CONFIG_CROSS_COMPILE="aarch64-linux-android-"
-CONFIG_LOCALVERSION="BY Winkmoon-QQ3432632982-perf"
 # CONFIG_LOCALVERSION_AUTO is not set
 # CONFIG_USELIB is not set
 CONFIG_SCHED_WALT=y
@@ -57,7 +56,6 @@ CONFIG_BUILD_ARM64_DTB_OVERLAY_IMAGE_NAMES="mediatek/evb6771_64_emmc mediatek/op
 #zhoumingjun@Swdp.shanghai, 2017/07/13 add configuration for elsa stubs
 CONFIG_ELSA_STUB=y
 #endif
-CONFIG_OVERLAY_FS=y
 CONFIG_COMPAT=y
 CONFIG_PM_AUTOSLEEP=y
 CONFIG_WQ_POWER_EFFICIENT_DEFAULT=y
