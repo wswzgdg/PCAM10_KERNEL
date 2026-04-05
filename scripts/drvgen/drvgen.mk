@@ -66,14 +66,13 @@ $(DRVGEN_FILE_LIST): $(DRVGEN_TOOL) $(DWS_FILE) $(DRVGEN_FIG) $(PROJ_DTS_FILES)
 		dws_path=$(srctree)/$(DRVGEN_PATH)/$$base_prj.dws ;\
 		if [ -f $$dws_path ] ; then \
 			mkdir -p $$prj_path ;\
-			cd $(srctree)/tools && $(python) -m dct.DrvGen $$dws_path $$prj_path $$prj_path cust_dtsi; \
-			cd - >/dev/null;\
+			PYTHONPATH=$(srctree)/tools $(PYTHON) -m dct.DrvGen $$dws_path $(abspath $(DRVGEN_OUT))/$$base_prj $(abspath $(DRVGEN_OUT))/$$base_prj cust_dtsi; \
 		fi \
 	done
 
 dtbo_check: $(MAIN_DTB_NAMES) $(PROJ_DTB_NAMES)
 	for i in $(PROJ_DTB_FILES); do \
-		$(srctree)/scripts/dtc/ufdt_apply_overlay $(MAIN_DTB_FILES) $$i $$i.merge;\
+		/usr/bin/fdtoverlay -i $(MAIN_DTB_FILES) -o $$i.merge $$i;\
 	done
 
 my_dtbo_id := 0
