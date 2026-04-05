@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Copyright (C) 2016 MediaTek Inc.
@@ -14,16 +14,20 @@
 
 import sys, os
 import re
-import ConfigParser
+import configparser
 import xml.dom.minidom
 
-from ModuleObj import ModuleObj
-from data.PmicData import PmicData
+from .ModuleObj import ModuleObj
+from ..data.PmicData import PmicData
 
-from utility.util import log
-from utility.util import LogLevel
-from utility.util import compare
-from utility.util import sorted_key
+from ..utility.util import log
+from ..utility.util import LogLevel
+from ..utility.util import compare
+
+
+def cmp(a, b):
+    return (a > b) - (a < b)
+from ..utility.util import sorted_key
 
 
 class PmicObj(ModuleObj):
@@ -39,7 +43,7 @@ class PmicObj(ModuleObj):
 
 
     def get_cfgInfo(self):
-        cp = ConfigParser.ConfigParser(allow_no_value=True)
+        cp = configparser.ConfigParser(allow_no_value=True, strict=False)
         cp.read(ModuleObj.get_cmpPath())
 
         PmicData._var_list = cp.options('APPLICATION')
@@ -47,7 +51,7 @@ class PmicObj(ModuleObj):
         if self.__chipName == '':
             return
         #parse the pmic config file
-        cmpPath = os.path.join(sys.path[0], 'config', self.__chipName + '.cmp')
+        cmpPath = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'config', self.__chipName + '.cmp')
         if not os.path.exists(cmpPath) or not os.path.isfile(cmpPath):
             log(LogLevel.error, 'Can not find %s pmic config file!' %(self.__chipName))
             sys.exit(-1)
@@ -61,8 +65,6 @@ class PmicObj(ModuleObj):
             self.__paraList.append(cp.get(key, 'PARAMETER_NAME'))
 
         #parse app count in fig file
-        cp.read(ModuleObj.get_chipId() + '.fig')
-
         cp.read(ModuleObj.get_figPath())
         self.__appCount = cp.getint('Chip Type', 'PMIC_APP_COUNT')
 

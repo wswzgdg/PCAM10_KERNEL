@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Copyright (C) 2016 MediaTek Inc.
@@ -17,9 +17,9 @@ import time
 import re
 import string
 
-from utility import version
-from utility.util import log
-from utility.util import LogLevel
+from ..utility import version
+from ..utility.util import log
+from ..utility.util import LogLevel
 
 class ModuleObj:
     _chip_id = ''
@@ -80,7 +80,7 @@ class ModuleObj:
 
     @staticmethod
     def get_figPath():
-        figPath = os.path.join(sys.path[0], 'config', ModuleObj.get_chipId() + '.fig')
+        figPath = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'config', ModuleObj.get_chipId() + '.fig')
         if not os.path.exists(figPath) or not os.path.isfile(figPath):
             log(LogLevel.error, 'Can not find %s.fig file!' %(ModuleObj.get_chipId()))
             sys.exit(-1)
@@ -89,7 +89,7 @@ class ModuleObj:
 
     @staticmethod
     def get_cmpPath():
-        cmpPath = os.path.join(sys.path[0], 'config', 'YuSu.cmp')
+        cmpPath = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'config', 'YuSu.cmp')
 
         if not os.path.exists(cmpPath) or not os.path.isfile(cmpPath):
             log(LogLevel.error, 'Can not find YuSu.cmp file!')

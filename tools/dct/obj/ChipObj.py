@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Copyright (C) 2016 MediaTek Inc.
@@ -16,33 +16,37 @@ import os, sys
 import collections
 import xml.dom.minidom
 
-from GpioObj import GpioObj
-from GpioObj import GpioObj_whitney
-from GpioObj import GpioObj_MT6759
-from GpioObj import GpioObj_MT6739
-from GpioObj import GpioObj_MT6771
-from GpioObj import GpioObj_MT6763
-from EintObj import EintObj
-from EintObj import EintObj_MT6750S
-from EintObj import EintObj_MT6739
-from AdcObj import AdcObj
-from ClkObj import ClkObj
-from ClkObj import ClkObj_Everest
-from ClkObj import ClkObj_Olympus
-from ClkObj import ClkObj_Rushmore
-from I2cObj import I2cObj
-from I2cObj import I2cObj_MT6759
-from I2cObj import I2cObj_MT6775
-from PmicObj import PmicObj
-from PmicObj import PmicObj_MT6758
-from Md1EintObj import Md1EintObj
-from Md1EintObj import Md1EintObj_MT6739
-from PowerObj import PowerObj
-from KpdObj import KpdObj
-from ModuleObj import ModuleObj
+from .GpioObj import GpioObj
+from .GpioObj import GpioObj_whitney
+from .GpioObj import GpioObj_MT6759
+from .GpioObj import GpioObj_MT6739
+from .GpioObj import GpioObj_MT6771
+from .GpioObj import GpioObj_MT6763
+from .EintObj import EintObj
+from .EintObj import EintObj_MT6750S
+from .EintObj import EintObj_MT6739
+from .AdcObj import AdcObj
+from .ClkObj import ClkObj
+from .ClkObj import ClkObj_Everest
+from .ClkObj import ClkObj_Olympus
+from .ClkObj import ClkObj_Rushmore
+from .I2cObj import I2cObj
+from .I2cObj import I2cObj_MT6759
+from .I2cObj import I2cObj_MT6775
+from .PmicObj import PmicObj
+from .PmicObj import PmicObj_MT6758
+from .Md1EintObj import Md1EintObj
+from .Md1EintObj import Md1EintObj_MT6739
+from .PowerObj import PowerObj
+from .KpdObj import KpdObj
+from .ModuleObj import ModuleObj
 
-from utility.util import log
-from utility.util import LogLevel
+from ..utility.util import log
+from ..utility.util import LogLevel
+
+
+def cmp(a, b):
+    return (a > b) - (a < b)
 
 para_map = {'adc':['adc_h', 'adc_dtsi'],\
             'clk':['clk_buf_h', 'clk_buf_dtsi'],\
@@ -175,7 +179,7 @@ class ChipObj:
             if para.strip() != '':
                 for value in para_map.values():
                     if para in value:
-                        name = para_map.keys()[idx]
+                        name = list(para_map.keys())[idx]
                         break
                     idx += 1
 

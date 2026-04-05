@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Copyright (C) 2016 MediaTek Inc.
@@ -21,28 +21,35 @@ import xml.dom.minidom
 sys.dont_write_bytecode = True
 
 sys.path.append('.')
+sys.path.append(os.path.join(sys.path[0], "obj"))
+sys.path.append(os.path.join(sys.path[0], "data"))
+sys.path.append(os.path.join(sys.path[0], "utility"))
 sys.path.append('..')
 
-from obj.ChipObj import ChipObj
-from obj.ChipObj import Everest
-from obj.ChipObj import Olympus
-from obj.ChipObj import MT6757_P25
-from obj.ChipObj import Rushmore
-from obj.ChipObj import Whitney
-from obj.ChipObj import MT6759
-from obj.ChipObj import MT6763
-from obj.ChipObj import MT6750S
-from obj.ChipObj import MT6758
-from obj.ChipObj import MT6739
-from obj.ChipObj import MT8695
-from obj.ChipObj import MT6771
-from obj.ChipObj import MT6775
+from .obj.ChipObj import ChipObj
+from .obj.ChipObj import Everest
+from .obj.ChipObj import Olympus
+from .obj.ChipObj import MT6757_P25
+from .obj.ChipObj import Rushmore
+from .obj.ChipObj import Whitney
+from .obj.ChipObj import MT6759
+from .obj.ChipObj import MT6763
+from .obj.ChipObj import MT6750S
+from .obj.ChipObj import MT6758
+from .obj.ChipObj import MT6739
+from .obj.ChipObj import MT8695
+from .obj.ChipObj import MT6771
+from .obj.ChipObj import MT6775
 
-from utility.util import LogLevel
-from utility.util import log
+from .utility.util import LogLevel
+from .utility.util import log
+
+
+def cmp(a, b):
+    return (a > b) - (a < b)
 
 def usage():
-    print '''
+    print('''
 usage: DrvGen [dws_path] [file_path] [log_path] [paras]...
 
 options and arguments:
@@ -51,7 +58,7 @@ dws_path    :    dws file path
 file_path   :    where you want to put generated files
 log_path    :    where to store the log files
 paras        :    parameter for generate wanted file
-'''
+''')
 
 def is_oldDws(path, gen_spec):
     if not os.path.exists(path):
@@ -60,7 +67,7 @@ def is_oldDws(path, gen_spec):
 
     try:
         root = xml.dom.minidom.parse(dws_path)
-    except Exception, e:
+    except Exception as e:
         log(LogLevel.warn, '%s is not xml format, try to use old DCT!' %(dws_path))
         if len(gen_spec) == 0:
             log(LogLevel.warn, 'Please use old DCT UI to gen all files!')
