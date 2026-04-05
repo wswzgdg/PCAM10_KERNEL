@@ -26,23 +26,42 @@ sys.path.append(os.path.join(sys.path[0], "data"))
 sys.path.append(os.path.join(sys.path[0], "utility"))
 sys.path.append('..')
 
-from .obj.ChipObj import ChipObj
-from .obj.ChipObj import Everest
-from .obj.ChipObj import Olympus
-from .obj.ChipObj import MT6757_P25
-from .obj.ChipObj import Rushmore
-from .obj.ChipObj import Whitney
-from .obj.ChipObj import MT6759
-from .obj.ChipObj import MT6763
-from .obj.ChipObj import MT6750S
-from .obj.ChipObj import MT6758
-from .obj.ChipObj import MT6739
-from .obj.ChipObj import MT8695
-from .obj.ChipObj import MT6771
-from .obj.ChipObj import MT6775
+try:
+    from .obj.ChipObj import ChipObj
+    from .obj.ChipObj import Everest
+    from .obj.ChipObj import Olympus
+    from .obj.ChipObj import MT6757_P25
+    from .obj.ChipObj import Rushmore
+    from .obj.ChipObj import Whitney
+    from .obj.ChipObj import MT6759
+    from .obj.ChipObj import MT6763
+    from .obj.ChipObj import MT6750S
+    from .obj.ChipObj import MT6758
+    from .obj.ChipObj import MT6739
+    from .obj.ChipObj import MT8695
+    from .obj.ChipObj import MT6771
+    from .obj.ChipObj import MT6775
 
-from .utility.util import LogLevel
-from .utility.util import log
+    from .utility.util import LogLevel
+    from .utility.util import log
+except (ImportError, ValueError):
+    from obj.ChipObj import ChipObj
+    from obj.ChipObj import Everest
+    from obj.ChipObj import Olympus
+    from obj.ChipObj import MT6757_P25
+    from obj.ChipObj import Rushmore
+    from obj.ChipObj import Whitney
+    from obj.ChipObj import MT6759
+    from obj.ChipObj import MT6763
+    from obj.ChipObj import MT6750S
+    from obj.ChipObj import MT6758
+    from obj.ChipObj import MT6739
+    from obj.ChipObj import MT8695
+    from obj.ChipObj import MT6771
+    from obj.ChipObj import MT6775
+
+    from utility.util import LogLevel
+    from utility.util import log
 
 
 def cmp(a, b):
