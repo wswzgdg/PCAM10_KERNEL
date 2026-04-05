@@ -12,7 +12,10 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 # See http://www.gnu.org/licenses/gpl-2.0.html for more details.
 
-import configparser
+try:
+    import configparser
+except ImportError:
+    import ConfigParser as configparser
 import string
 import xml.dom.minidom
 

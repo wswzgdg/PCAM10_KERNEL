@@ -14,7 +14,10 @@
 
 import sys, os
 import re
-import configparser
+try:
+    import configparser
+except ImportError:
+    import ConfigParser as configparser
 import xml.dom.minidom
 
 from .ModuleObj import ModuleObj

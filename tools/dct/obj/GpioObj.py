@@ -16,7 +16,10 @@ import re
 import os
 import sys
 import string
-import configparser
+try:
+    import configparser
+except ImportError:
+    import ConfigParser as configparser
 import xml.dom.minidom
 
 

@@ -15,7 +15,10 @@
 import re
 import string
 import xml.dom.minidom
-import configparser
+try:
+    import configparser
+except ImportError:
+    import ConfigParser as configparser
 
 from .ModuleObj import ModuleObj
 #from ..utility import util
