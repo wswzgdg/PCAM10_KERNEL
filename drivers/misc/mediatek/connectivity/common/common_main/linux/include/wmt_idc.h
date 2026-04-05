@@ -27,6 +27,10 @@
 #define WMT_IDC_RX_MAX_LEN 384
 #define LTE_MSG_ID_OFFSET 0x30
 
+#ifndef MD_MOD_GMMGR
+#define MD_MOD_GMMGR 13
+#endif
+
 typedef enum {
 	WMT_IDC_TX_OPCODE_MIN = 0,
 	WMT_IDC_TX_OPCODE_LTE_PARA = 0x0a,
